@@ -3,7 +3,7 @@ import time
 from datetime import timedelta
 import logging
 
-from modelling.component_graph import ComponentGraph
+from sifra.modelling.component_graph import ComponentGraph
 
 # these are required for defining the data model
 from sifra.modelling.structural import (
@@ -154,7 +154,7 @@ class IFSystem(Model):
             prng = np.random.RandomState(int(hazard_level.hazard_intensity*100))
         else:
             # seeding was not used
-            prng = np.random.RandomState()
+            prng = np.random.RandomState(seed=2)
 
         # record the number of elements for use
         num_elements = len(self.components)

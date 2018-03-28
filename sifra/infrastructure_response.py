@@ -45,7 +45,13 @@ def run_scenario(config_file):
     # `IFSystem` object that contains a list of components
     infrastructure = ingest_spreadsheet(config_file)
 
+
+
     post_processing_list = calculate_response(scenario, infrastructure)
+
+    economic_loss_array = post_processing_list[4]
+    print("economic_loss_array: ", economic_loss_array)
+
     # After the response has been calculated the post processing
     # will record the results
     post_processing(infrastructure, scenario, post_processing_list)
