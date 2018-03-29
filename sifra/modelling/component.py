@@ -18,9 +18,9 @@ class Component(Base):
     component_type = Element('str', 'Type of component.')
     component_class = Element('str', 'Class of component.')
     node_type = Element('str', 'Class of node.')
-    node_cluster = Element('str', 'Node cluster.')
+    # node_cluster = Element('str', 'Node cluster.')
 
-    operating_capacity = Element('float', 'Component nominal operating capacity')
+    # operating_capacity = Element('float', 'Component nominal operating capacity')
     cost_fraction = Element('float', 'Cost as a fraction of total value of system')
 
     destination_components = Element('IODict', 'List of connected components', IODict)
@@ -69,5 +69,5 @@ class ConnectionValues(Base):
     Each connection between two components has a capacity and
     a weight.
     """
-    link_capacity = Element('float', 'Link capacity', 0.0)
-    weight = Element('float', 'Weight', 0.0)
+    # link_capacity = Element('float', 'Link capacity', 0.0)
+    # weight = Element('float', 'Weight', 0.0)

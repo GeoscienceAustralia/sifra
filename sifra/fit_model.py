@@ -29,27 +29,27 @@ init()
 # Helper functions
 # ----------------------------------------------------------------------------
 
-def ci_dict_to_df(ci):
-    convp = lambda x: ('%.2f' % (x[0] * 100.0)) + '%'
-    conv = lambda x: x[1]
-    ci_header = []
-    ci_values = []
-    title_set = False
-    for name, row in ci.items():
-        if not title_set:
-            ciheader = [i for i in map(convp, row)]
-            title_set = True
-        ci_values.append([i for i in map(conv, row)])
-    ci_df = pd.DataFrame(ci_values, index=ci.keys(), columns=ci_header)
-    ci_df = ci_df.sort()
-    return ci_df
+# def ci_dict_to_df(ci):
+#     convp = lambda x: ('%.2f' % (x[0] * 100.0)) + '%'
+#     conv = lambda x: x[1]
+#     ci_header = []
+#     ci_values = []
+#     title_set = False
+#     for name, row in ci.items():
+#         if not title_set:
+#             ciheader = [i for i in map(convp, row)]
+#             title_set = True
+#         ci_values.append([i for i in map(conv, row)])
+#     ci_df = pd.DataFrame(ci_values, index=ci.keys(), columns=ci_header)
+#     ci_df = ci_df.sort()
+#     return ci_df
 
 
 # ----------------------------------------------------------------------------
 # For plots: using the  brewer2 color maps by Cynthia Brewer
 # ----------------------------------------------------------------------------
 
-clrs = brewer2mpl.get_map('RdYlGn', 'Diverging', 11).mpl_colors
+# clrs = brewer2mpl.get_map('RdYlGn', 'Diverging', 11).mpl_colors
 set2 = brewer2mpl.get_map('Set2', 'qualitative', 5).mpl_colors
 
 markers = ['o', '^', 's', 'D', 'x', '+']
@@ -80,8 +80,8 @@ markers = ['o', '^', 's', 'D', 'x', '+']
 # ----------------------------------------------------------------------------
 
 
-def lognorm_cdf(x, shape, loc, scale):
-    return stats.lognorm.cdf(x, shape, loc=loc, scale=scale)
+# def lognorm_cdf(x, shape, loc, scale):
+#     return stats.lognorm.cdf(x, shape, loc=loc, scale=scale)
 
 
 def res_lognorm_cdf(params, x, data, eps=None):
@@ -114,11 +114,11 @@ def fit_prob_exceed_model(hazard_input_vals, pb_exceed, SYS_DS, out_path):
                                           'LogStdDev',
                                           'Location',
                                           'Chi-Sqr'])
-    decimals = pd.Series([3, 3, 3],
-                         index=['Median', 'LogStdDev', 'Location'])
+    # decimals = pd.Series([3, 3, 3],
+    #                      index=['Median', 'LogStdDev', 'Location'])
 
     # ----- Initial fit -----
-    sys_dmg_ci = [{} for _ in xrange(len(SYS_DS))]
+    # sys_dmg_ci = [{} for _ in xrange(len(SYS_DS))]
     sys_dmg_fit = [[] for _ in xrange(len(SYS_DS))]
     for dx in range(1, len(SYS_DS)):
         x_sample = hazard_input_vals
@@ -381,7 +381,8 @@ def fit_restoration_data(RESTORATION_TIME_RANGE, sys_fn, SYS_DS, out_path):
                                               'Chi-Sqr'])
 
     # ----- Get the initial fit -----
-    sys_rst_ci = [{} for _ in xrange(len(SYS_DS))]
+    # sys_rst_ci = [{} for _ in xrange(len(SYS_DS))]
+
     sys_rst_fit = [[] for _ in xrange(len(SYS_DS))]
     for dx in range(1, len(SYS_DS)):
         x_sample = RESTORATION_TIME_RANGE
@@ -604,8 +605,9 @@ def fit_restoration_data(RESTORATION_TIME_RANGE, sys_fn, SYS_DS, out_path):
 # sys_fn[DS].dropna().plot(kind='kde', xlim=(0,100), style='r--')
 # plt.show(block=False)
 
-def fit_restoration_data_multimode(RESTORATION_TIME_RANGE,
-                                   sys_fn, SYS_DS, out_path):
+# def fit_restoration_data_multimode(RESTORATION_TIME_RANGE,
+#                                    sys_fn, SYS_DS, out_path):
+
     """
     *********************************************************************
     This function is not yet mature and is meant only for experimentation
@@ -778,7 +780,7 @@ if __name__ == "__main__":
 
     # Define input files, output location, scenario inputs
     INPUT_PATH = os.path.join(os.getcwd(), sc.input_dir_name)
-    SYS_CONFIG_FILE = os.path.join(INPUT_PATH, fc.sys_config_file_name)
+    # SYS_CONFIG_FILE = os.path.join(INPUT_PATH, fc.sys_config_file_name)
     RAW_OUTPUT_DIR = sc.raw_output_dir
     RESTORATION_TIME_RANGE = sc.restoration_time_range
     SYS_DS = fc.sys_dmg_states

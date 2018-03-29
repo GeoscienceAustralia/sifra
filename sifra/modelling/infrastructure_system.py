@@ -32,7 +32,7 @@ class IFSystem(Model):
     supply_nodes = Element('dict', 'The components that supply the infrastructure system', dict)
     output_nodes = Element('dict', 'The components that output from the infrastructure system', dict)
 
-    supply_total = None
+    # supply_total = None
     _component_graph = None
     if_nominal_output = None
     system_class = None
@@ -118,7 +118,7 @@ class IFSystem(Model):
             prng = np.random.RandomState(int(hazard_level.hazard_intensity*100))
         else:
             # seeding was not used
-            prng = np.random.RandomState()
+            prng = np.random.RandomState(seed=2)
 
         # record the number of elements for use
         num_components = len(self.components)
@@ -179,12 +179,12 @@ class IFSystem(Model):
         if_level_output = np.zeros((scenario.num_samples, len(self.output_nodes)),
                                    dtype=np.float64)
         # output available as recovery progresses
-        if_output_given_recovery = np.zeros((scenario.num_samples, scenario.num_time_steps), dtype=np.float64)
+        # if_output_given_recovery = np.zeros((scenario.num_samples, scenario.num_time_steps), dtype=np.float64)
 
         # iterate through the samples
         for sample_index in range(scenario.num_samples):
             # initialise the function and loss arrays for the sample
-            component_function_at_time = []
+            # component_function_at_time = []
             comp_sample_loss = np.zeros(len(self.components))
             comp_sample_func = np.zeros(len(self.components))
             # Extract the array of damage states for this sample
@@ -240,7 +240,7 @@ class IFSystem(Model):
             self._component_graph.update_capacity(self.components, comp_level_func)
 
         # calculate the capacity
-        system_flows_sample = []
+        # system_flows_sample = []
         system_outflows_sample = np.zeros(len(self.output_nodes))
         for output_index, (output_comp_id, output_comp) in enumerate(self.output_nodes.iteritems()):
             # track the outputs by source type (e.g. water or coal)

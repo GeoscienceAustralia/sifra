@@ -58,6 +58,9 @@ def run_scenario(config_file):
                  Style.RESET_ALL)
 
     post_processing_list = calculate_response(scenario, infrastructure)
+
+    economic_loss_array = post_processing_list[4]
+    print("economic_loss_array: ",economic_loss_array )
     # After the response has been calculated the post processing
     # will record the results
     post_processing(infrastructure, scenario, post_processing_list)
@@ -593,7 +596,8 @@ def pe2pb(pe):
 
 def main():
     code_start_time = time.time()
-    SETUPFILE = sys.argv[1]
+    SETUPFILE = "C:/Users/u12089/Desktop/sifra-v0.2.0/simulation_setup/test_scenario_ps_coal.conf"
+
     run_scenario(SETUPFILE)
 
     logging.info(Style.BRIGHT + Fore.YELLOW +

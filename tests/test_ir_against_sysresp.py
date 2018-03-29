@@ -11,55 +11,55 @@ from sifra.sifraclasses import FacilitySystem, Scenario
 from sifra.infrastructure_response import calculate_response, ingest_spreadsheet
 
 logging.basicConfig(level=logging.INFO)
-config_file = './test_scenario_ps_coal.conf'
-ident_config_file = './test_scenario_ps_coal.conf'
+config_file = './tests/test_scenario_ps_coal.conf'
+ident_config_file = './tests/test_scenario_ps_coal.conf'
 
 
 class TestNewModel(unittest.TestCase):
-    def test_infraresp_vs_sysresponse(self):
-        scenario = Scenario(config_file)
-        facility = FacilitySystem(config_file)
-        component_resp_df = calc_sys_output(facility, scenario)
-        sr_result_list = calc_loss_arrays(facility, scenario,
-                                          component_resp_df,
-                                          parallel_proc=scenario.run_parallel_proc)
+    # def test_infraresp_vs_sysresponse(self):
+    #     scenario = Scenario(config_file)
+    #     facility = FacilitySystem(config_file)
+    #     component_resp_df = calc_sys_output(facility, scenario)
+    #     sr_result_list = calc_loss_arrays(facility, scenario,
+    #                                       component_resp_df,
+    #                                       parallel_proc=scenario.run_parallel_proc)
+    #
+    #     infrastructure = ingest_spreadsheet(config_file)  # `IFSystem` object
+    #     scenario.algorithm_factory = infrastructure[1]
+    #     if_result_list = calculate_response(scenario, infrastructure[0])
+    #
+    #     self.dump_results(if_result_list, sr_result_list)
 
-        infrastructure = ingest_spreadsheet(config_file)  # `IFSystem` object
-        scenario.algorithm_factory = infrastructure[1]
-        if_result_list = calculate_response(scenario, infrastructure[0])
+    # def test_if_vs_sys_ident(self):
+    #     scenario = Scenario(ident_config_file)
+    #     facility = FacilitySystem(ident_config_file)
+    #     component_resp_df = calc_sys_output(facility, scenario)
+    #     sr_result_list = calc_loss_arrays(facility,
+    #                                       scenario,
+    #                                       component_resp_df,
+    #                                       parallel_proc=scenario.run_parallel_proc)
+    #
+    #     infrastructure = ingest_spreadsheet(ident_config_file)  # `IFSystem` object
+    #     scenario.algorithm_factory = infrastructure[1]
+    #     if_result_list = calculate_response(scenario, infrastructure[0])
+    #
+    #     self.dump_results(if_result_list, sr_result_list)
 
-        self.dump_results(if_result_list, sr_result_list)
-
-    def test_if_vs_sys_ident(self):
-        scenario = Scenario(ident_config_file)
-        facility = FacilitySystem(ident_config_file)
-        component_resp_df = calc_sys_output(facility, scenario)
-        sr_result_list = calc_loss_arrays(facility,
-                                          scenario,
-                                          component_resp_df,
-                                          parallel_proc=scenario.run_parallel_proc)
-
-        infrastructure = ingest_spreadsheet(ident_config_file)  # `IFSystem` object
-        scenario.algorithm_factory = infrastructure[1]
-        if_result_list = calculate_response(scenario, infrastructure[0])
-
-        self.dump_results(if_result_list, sr_result_list)
-
-    def test_if_vs_sys_simple(self):
-        simple_config = 'test_simple_series_struct.conf'
-        scenario = Scenario(simple_config)
-        facility = FacilitySystem(simple_config)
-        component_resp_df = calc_sys_output(facility, scenario)
-        sr_result_list = calc_loss_arrays(facility,
-                                          scenario,
-                                          component_resp_df,
-                                          parallel_proc=scenario.run_parallel_proc)
-
-        infrastructure = ingest_spreadsheet(simple_config)  # `IFSystem` object
-        scenario.algorithm_factory = infrastructure[1]
-        if_result_list = calculate_response(scenario, infrastructure[0])
-
-        self.dump_results(if_result_list, sr_result_list)
+    # def test_if_vs_sys_simple(self):
+    #     simple_config = './tests/test_simple_series_struct.conf'
+    #     scenario = Scenario(simple_config)
+    #     facility = FacilitySystem(simple_config)
+    #     component_resp_df = calc_sys_output(facility, scenario)
+    #     sr_result_list = calc_loss_arrays(facility,
+    #                                       scenario,
+    #                                       component_resp_df,
+    #                                       parallel_proc=scenario.run_parallel_proc)
+    #
+    #     infrastructure = ingest_spreadsheet(simple_config)  # `IFSystem` object
+    #     scenario.algorithm_factory = infrastructure[1]
+    #     if_result_list = calculate_response(scenario, infrastructure[0])
+    #
+    #     self.dump_results(if_result_list, sr_result_list)
 
     def dump_results(self, if_result_list, sr_result_list):
         # check the differences between the two results

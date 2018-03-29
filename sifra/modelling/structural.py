@@ -32,12 +32,12 @@ class ValidationError(Exception):
     pass
 
 
-class AlreadySavedException(Exception):
-    """
-    Raised if an attempt is made to save a 'Document' which has previously been
-    saved.
-    """
-    pass
+# class AlreadySavedException(Exception):
+#     """
+#     Raised if an attempt is made to save a 'Document' which has previously been
+#     saved.
+#     """
+#     pass
 
 
 class DisallowedElementException(ValueError):
@@ -153,13 +153,13 @@ class Element(object):
             raise NoDefaultException()
         return self._default() if callable(self._default) else self._default
 
-    def to_json(self, val):
-        """
-        Convert *val* to a form that can be JSON serialised.
-        """
-
-        self.__validate__(val)
-        return jsonify(val)
+    # def to_json(self, val):
+    #     """
+    #     Convert *val* to a form that can be JSON serialised.
+    #     """
+    #
+    #     self.__validate__(val)
+    #     return jsonify(val)
 
     def __validate__(self, val):
         """
@@ -202,7 +202,6 @@ class Element(object):
                     raise e
                 except Exception as e:
                     raise ValidationError(str(e))
-
 
 class StructuralMeta(type):
     """
@@ -408,5 +407,5 @@ class Base(object):
     def set_provider(cls, provider):
         cls._provider = provider
 
-from sifra.modelling.serialisation import SqliteSerialisationProvider
-Base.set_provider(SqliteSerialisationProvider())
+# from sifra.modelling.serialisation import SqliteSerialisationProvider
+# Base.set_provider(SqliteSerialisationProvider())

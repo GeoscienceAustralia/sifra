@@ -17,17 +17,16 @@ class ResponseModel(Base):
         raise NotImplementedError('__call__ is not implemented'
                                   ' on {}'.format(self.__class__.__name__))
 
-
 class DamageState(ResponseModel):
     """
     The allocated damage state for a given component
     """
     damage_state = Element('str', 'Damage state name')
-    damage_state_description = Element('str', 'A description of what the damage state means')
+    # damage_state_description = Element('str', 'A description of what the damage state means')
     mode = Element('int','The mode used to estimate the damage')
     functionality = Element('float', 'Level of functionality for this damage level',
                             0.0, [lambda x: float(x) >= 0.0])
-    fragility_source = Element('str', 'The source of the parameter values')
+    # fragility_source = Element('str', 'The source of the parameter values')
     damage_ratio = Element('float', 'damage ratio',
                            0.0, [lambda x: float(x) >= 0.0])
 
@@ -148,8 +147,8 @@ class RecoveryState(Base):
                             0.0, [lambda x: float(x) > 0.0])
     recovery_std = Element('float', 'Recovery standard deviation',
                            0.0, [lambda x: float(x) > 0.0])
-    recovery_95percentile = Element('float', 'Recovery 95th percentile',
-                                    0.0, [lambda x: float(x) > 0.0])
+    # recovery_95percentile = Element('float', 'Recovery 95th percentile',
+    #                                 0.0, [lambda x: float(x) > 0.0])
 
 
 # TODO Complete the recovery algorithm
@@ -181,8 +180,8 @@ class AlgorithmFactory(object):
 
         self.response_algorithms[hazard_type][component_type] = algorithm
 
-    def get_recovery_algorithm(self, component_type, hazard_type):
-        return self.recovery_algorithms[hazard_type][component_type]
+    # def get_recovery_algorithm(self, component_type, hazard_type):
+    #     return self.recovery_algorithms[hazard_type][component_type]
 
     def add_recovery_algorithm(self, component_type, hazard_type, algorithm):
         if hazard_type not in self.recovery_algorithms:

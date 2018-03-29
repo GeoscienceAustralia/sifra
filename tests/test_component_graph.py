@@ -8,97 +8,97 @@ from sifra.sysresponse import calc_loss_arrays, calc_sys_output, compute_output_
 from sifra.sifraclasses import FacilitySystem, Scenario
 from sifra.infrastructure_response import calculate_response, ingest_spreadsheet
 
-config_file = './test_scenario_ps_coal.conf'
-series_config = './test_simple_series_struct.conf'
-parallel_config = './test_simple_parallel_struct.conf'
-dependent_config = './test_simple_series_struct_dep.conf'
+config_file = './tests/test_scenario_ps_coal.conf'
+series_config = './tests/test_simple_series_struct.conf'
+parallel_config = './tests/test_simple_parallel_struct.conf'
+dependent_config = './tests/test_simple_series_struct_dep.conf'
 
 
 class TestComponentGraph(unittest.TestCase):
-    def test_graph_function(self):
-        facility = FacilitySystem(config_file)
-        infrastructure, _ = ingest_spreadsheet(config_file)
+    # def test_graph_function(self):
+    #     facility = FacilitySystem(config_file)
+    #     infrastructure, _ = ingest_spreadsheet(config_file)
+    #
+    #     # seeding is not used
+    #     prng = np.random.RandomState()
+    #
+    #     for rand_func, rand_comp in prng.uniform(size=(10000, 2)):
+    #         function_level = rand_func
+    #         component_idx = int(rand_comp*31 + 1)
+    #         function_list = [1.0]*33
+    #         function_list[component_idx] = function_level
+    #         sys_output = compute_output_given_ds(function_list, facility)
+    #
+    #         function_list = [1.0]*33
+    #         function_list[component_idx] = function_level
+    #         if_output = infrastructure.compute_output_given_ds(function_list)
+    #
+    #         if sys_output[0] != if_output[0] or \
+    #                         sys_output[1] != if_output[1]:
+    #             print("\n{} {} sr:{} if:{}".format(function_level,
+    #                                              component_idx,
+    #                                              sys_output,
+    #                                              if_output))
+    #             # dump trees
+    #             print("\nsys graph")
+    #             infrastructure._component_graph.dump_graph(facility.network.G)
+    #             print("\nif graph")
+    #             infrastructure._component_graph.dump_graph()
 
-        # seeding is not used
-        prng = np.random.RandomState()
+    # def test_source_break(self):
+    #     facility = FacilitySystem(config_file)
+    #
+    #     infrastructure, _ = ingest_spreadsheet(config_file)
+    #
+    #     functionality = 0.316189922718
+    #     comp_idx = 5
+    #     function_list = [1.0] * 33
+    #     function_list[comp_idx] = functionality
+    #     # sr:[300.0, 300.0] if:[189.71395363  189.71395363]
+    #     sys_output = compute_output_given_ds(function_list, facility)
+    #
+    #     # reset the functionality array
+    #     function_list = [1.0] * 33
+    #     function_list[comp_idx] = functionality
+    #     if_output = infrastructure.compute_output_given_ds(function_list)
+    #
+    #     if sys_output[0] != if_output[0] or \
+    #                     sys_output[1] != if_output[1]:
+    #         print("\n5 0.31 sr:{} if:{}".format(sys_output,
+    #                                             if_output))
+    #         # dump trees
+    #         print("\nsys graph")
+    #         infrastructure._component_graph.dump_graph(facility.network.G)
+    #         print("\nif graph")
+    #         infrastructure._component_graph.dump_graph()
 
-        for rand_func, rand_comp in prng.uniform(size=(10000, 2)):
-            function_level = rand_func
-            component_idx = int(rand_comp*31 + 1)
-            function_list = [1.0]*33
-            function_list[component_idx] = function_level
-            sys_output = compute_output_given_ds(function_list, facility)
-
-            function_list = [1.0]*33
-            function_list[component_idx] = function_level
-            if_output = infrastructure.compute_output_given_ds(function_list)
-
-            if sys_output[0] != if_output[0] or \
-                            sys_output[1] != if_output[1]:
-                print("\n{} {} sr:{} if:{}".format(function_level,
-                                                 component_idx,
-                                                 sys_output,
-                                                 if_output))
-                # dump trees
-                print("\nsys graph")
-                infrastructure._component_graph.dump_graph(facility.network.G)
-                print("\nif graph")
-                infrastructure._component_graph.dump_graph()
-
-    def test_source_break(self):
-        facility = FacilitySystem(config_file)
-
-        infrastructure, _ = ingest_spreadsheet(config_file)
-
-        functionality = 0.316189922718
-        comp_idx = 5
-        function_list = [1.0] * 33
-        function_list[comp_idx] = functionality
-        # sr:[300.0, 300.0] if:[189.71395363  189.71395363]
-        sys_output = compute_output_given_ds(function_list, facility)
-
-        # reset the functionality array
-        function_list = [1.0] * 33
-        function_list[comp_idx] = functionality
-        if_output = infrastructure.compute_output_given_ds(function_list)
-
-        if sys_output[0] != if_output[0] or \
-                        sys_output[1] != if_output[1]:
-            print("\n5 0.31 sr:{} if:{}".format(sys_output,
-                                                if_output))
-            # dump trees
-            print("\nsys graph")
-            infrastructure._component_graph.dump_graph(facility.network.G)
-            print("\nif graph")
-            infrastructure._component_graph.dump_graph()
-
-    def test_duplicate_break(self):
-        facility = FacilitySystem(config_file)
-
-        infrastructure, _ = ingest_spreadsheet(config_file)
-
-        functionality = 0.455400408676
-        comp_idx = 16
-        function_list = [1.0] * 33
-        function_list[comp_idx] = functionality
-
-        # sr:[300.0, 300.0] if:[189.71395363  189.71395363]
-        sys_output = compute_output_given_ds(function_list, facility)
-
-        # reset the functionality array
-        function_list = [1.0] * 33
-        function_list[comp_idx] = functionality
-        if_output = infrastructure.compute_output_given_ds(function_list)
-
-        if sys_output[0] != if_output[0] or \
-                        sys_output[1] != if_output[1]:
-            print("\n5 0.31 sr:{} if:{}".format(sys_output,
-                                                if_output))
-            # dump trees
-            print("\nsys graph")
-            infrastructure._component_graph.dump_graph(facility.network.G)
-            print("\nif graph")
-            infrastructure._component_graph.dump_graph()
+    # def test_duplicate_break(self):
+    #     facility = FacilitySystem(config_file)
+    #
+    #     infrastructure, _ = ingest_spreadsheet(config_file)
+    #
+    #     functionality = 0.455400408676
+    #     comp_idx = 16
+    #     function_list = [1.0] * 33
+    #     function_list[comp_idx] = functionality
+    #
+    #     # sr:[300.0, 300.0] if:[189.71395363  189.71395363]
+    #     sys_output = compute_output_given_ds(function_list, facility)
+    #
+    #     # reset the functionality array
+    #     function_list = [1.0] * 33
+    #     function_list[comp_idx] = functionality
+    #     if_output = infrastructure.compute_output_given_ds(function_list)
+    #
+    #     if sys_output[0] != if_output[0] or \
+    #                     sys_output[1] != if_output[1]:
+    #         print("\n5 0.31 sr:{} if:{}".format(sys_output,
+    #                                             if_output))
+    #         # dump trees
+    #         print("\nsys graph")
+    #         infrastructure._component_graph.dump_graph(facility.network.G)
+    #         print("\nif graph")
+    #         infrastructure._component_graph.dump_graph()
 
     def test_func_changes_in_series(self):
         series_if, _ = ingest_spreadsheet(series_config)

@@ -827,7 +827,7 @@ def main():
     fc = FacilityObj(SETUPFILE)
 
     # Define input files, output location, scenario inputs
-    SYS_CONFIG_FILE = os.path.join(sc.input_path, fc.sys_config_file_name)
+    # SYS_CONFIG_FILE = os.path.join(sc.input_path, fc.sys_config_file_name)
 
     if not os.path.exists(sc.output_path):
         os.makedirs(sc.output_path)

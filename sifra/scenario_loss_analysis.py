@@ -137,7 +137,7 @@ def comp_recovery_given_haz(facility, compname, hazval, t,
     # fn  = sorted(fragdict['functionality'][ct].values(), reverse=True)
     comp_fn = component_response.loc[(compname, 'func_mean'), ('%0.3f'% hazval)]
     
-    haz_val_str = ("%0.3f" % np.float(hazval))
+    # haz_val_str = ("%0.3f" % np.float(hazval))
     if ct not in uncosted_comptypes \
         and comps_avl_for_int_replacement >= 1:
         # Parameters for Temporary Restoration:
@@ -510,9 +510,9 @@ def vis_restoration_process(scenario,
     
     rst_time_line = np.zeros((len(out_node_list), xmax))
     line_rst_times = {}
-    ypos = 0
+    # ypos = 0
     for x, onode in enumerate(out_node_list): 
-        ypos += 100.0 * facility.output_dict[onode]['capacity_fraction']
+        # ypos += 100.0 * facility.output_dict[onode]['capacity_fraction']
         
         # line_rst_times[onode] = \
         #     max(rst_setup_df[rst_setup_df['OutputNode']==onode]['RstEnd'])
@@ -1022,7 +1022,7 @@ facility = FacilityObj(SETUPFILE)
 INPUT_PATH = scenario.input_path
 OUTPUT_PATH = scenario.output_path
 RAW_OUTPUT_DIR = scenario.raw_output_dir
-SYS_CONFIG_FILE = os.path.join(INPUT_PATH, facility.sys_config_file_name)
+# SYS_CONFIG_FILE = os.path.join(INPUT_PATH, facility.sys_config_file_name)
 
 RESTORATION_TIME_RANGE = scenario.restoration_time_range
 RESTORATION_STREAMS = scenario.restoration_streams
@@ -1079,25 +1079,25 @@ comptype_resp_df.columns = [haz_vals_str]
 
 ct_resp_flat = comptype_resp_df.reset_index('response')
 
-ctype_loss_mean = \
-    ct_resp_flat[ct_resp_flat['response'] == 'loss_mean'].\
-    drop('response', axis=1)
+# ctype_loss_mean = \
+#     ct_resp_flat[ct_resp_flat['response'] == 'loss_mean'].\
+#     drop('response', axis=1)
 
-ctype_loss_tot = \
-    ct_resp_flat[ct_resp_flat['response'] == 'loss_tot'].\
-    drop('response', axis=1)
+# ctype_loss_tot = \
+#     ct_resp_flat[ct_resp_flat['response'] == 'loss_tot'].\
+#     drop('response', axis=1)
 
-ctype_loss_std = \
-    ct_resp_flat[ct_resp_flat['response'] == 'loss_std'].\
-    drop('response', axis=1)
+# ctype_loss_std = \
+#     ct_resp_flat[ct_resp_flat['response'] == 'loss_std'].\
+#     drop('response', axis=1)
 
-ctype_func_mean = \
-    ct_resp_flat[ct_resp_flat['response'] == 'func_mean'].\
-    drop('response', axis=1)
+# ctype_func_mean = \
+#     ct_resp_flat[ct_resp_flat['response'] == 'func_mean'].\
+#     drop('response', axis=1)
 
-ctype_func_std = \
-    ct_resp_flat[ct_resp_flat['response'] == 'func_std'].\
-    drop('response', axis=1)
+# ctype_func_std = \
+#     ct_resp_flat[ct_resp_flat['response'] == 'func_std'].\
+#     drop('response', axis=1)
 
 ctype_failure_mean = \
     ct_resp_flat[ct_resp_flat['response'] == 'num_failures'].\

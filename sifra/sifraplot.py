@@ -22,12 +22,12 @@ COLR_DARK2 = brewer2mpl.get_map('Dark2', 'Qualitative', 8).mpl_colors
 COLR_SET1 = brewer2mpl.get_map('Set1', 'Qualitative', 9).mpl_colors
 COLR_SET2 = brewer2mpl.get_map('Set2', 'Qualitative', 8).mpl_colors
 COLR_SET3 = brewer2mpl.get_map('Set3', 'Qualitative', 12).mpl_colors
-COLR_RDYLGN = brewer2mpl.get_map('RdYlGn', 'Diverging', 11).mpl_colors
+# COLR_RDYLGN = brewer2mpl.get_map('RdYlGn', 'Diverging', 11).mpl_colors
 COLR_PAIR = brewer2mpl.get_map('Paired', 'Qualitative', 12).mpl_colors
-COLR_SPECTRAL = brewer2mpl.get_map('Spectral', 'Diverging', 11).mpl_colors
+# COLR_SPECTRAL = brewer2mpl.get_map('Spectral', 'Diverging', 11).mpl_colors
 COLR_DS = [COLR_PAIR[9], COLR_PAIR[3], COLR_PAIR[1],
            COLR_PAIR[7], COLR_PAIR[5]]
-COLR_MIX = COLR_SET1 + COLR_DARK2
+# COLR_MIX = COLR_SET1 + COLR_DARK2
 
 # ----------------------------------------------------------------------------
 
@@ -58,47 +58,47 @@ def split_long_label(string, delims, max_chars_per_line=20):
 # ----------------------------------------------------------------------------
 
 
-def calc_tick_pos(stepsize, ax_vals_list, ax_labels_list,
-                  maxnumticks=11, plot_type='line'):
-    '''
-    Calculates appropriate tick positions based on
-    given input parameters
-    '''
-    stepsize = stepsize
-    numticks = int(round((max(ax_vals_list) - min(ax_vals_list)) / stepsize))
-
-    while numticks > maxnumticks:
-        stepsize = stepsize * 2.0
-        numticks = int(round((max(ax_vals_list) - min(ax_vals_list)) /
-                             stepsize))
-
-    skip = int(len(ax_vals_list) / numticks)
-    ndx_all = range(1, len(ax_vals_list) + 1, 1)
-
-    if plot_type == 'box':
-        tick_pos = ndx_all[0::skip]
-        if max(tick_pos) != max(ndx_all):
-            numticks += 1
-            tick_pos = np.append(tick_pos, max(ndx_all))
-
-        tick_val = np.zeros(len(tick_pos))
-        i = 0
-        for j in tick_pos:
-            tick_val[i] = ax_labels_list[j - 1]
-            i += 1
-
-    elif plot_type == 'line':
-        tick_pos = ax_vals_list[0::skip]
-        if max(tick_pos) != max(ax_vals_list):
-            numticks += 1
-            tick_pos = np.append(tick_pos, max(ax_vals_list))
-        tick_val = tick_pos
-
-    else:
-        tick_pos = ax_vals_list
-        tick_val = ax_labels_list
-
-    return tick_pos, tick_val
+# def calc_tick_pos(stepsize, ax_vals_list, ax_labels_list,
+#                   maxnumticks=11, plot_type='line'):
+#     '''
+#     Calculates appropriate tick positions based on
+#     given input parameters
+#     '''
+#     stepsize = stepsize
+#     numticks = int(round((max(ax_vals_list) - min(ax_vals_list)) / stepsize))
+#
+#     while numticks > maxnumticks:
+#         stepsize = stepsize * 2.0
+#         numticks = int(round((max(ax_vals_list) - min(ax_vals_list)) /
+#                              stepsize))
+#
+#     skip = int(len(ax_vals_list) / numticks)
+#     ndx_all = range(1, len(ax_vals_list) + 1, 1)
+#
+#     if plot_type == 'box':
+#         tick_pos = ndx_all[0::skip]
+#         if max(tick_pos) != max(ndx_all):
+#             numticks += 1
+#             tick_pos = np.append(tick_pos, max(ndx_all))
+#
+#         tick_val = np.zeros(len(tick_pos))
+#         i = 0
+#         for j in tick_pos:
+#             tick_val[i] = ax_labels_list[j - 1]
+#             i += 1
+#
+#     elif plot_type == 'line':
+#         tick_pos = ax_vals_list[0::skip]
+#         if max(tick_pos) != max(ax_vals_list):
+#             numticks += 1
+#             tick_pos = np.append(tick_pos, max(ax_vals_list))
+#         tick_val = tick_pos
+#
+#     else:
+#         tick_pos = ax_vals_list
+#         tick_val = ax_labels_list
+#
+#     return tick_pos, tick_val
 
 # ----------------------------------------------------------------------------
 

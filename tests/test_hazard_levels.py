@@ -6,13 +6,13 @@ from sifra.sifraclasses import Scenario
 from sifra.modelling.hazard_levels import HazardLevels, HazardLevel
 from sifra.modelling.location import Location
 
-config_file = '/opt/project/tests/test_scenario_ps_coal.conf'
+config_file = './tests/test_scenario_ps_coal.conf'
 
 
 class TestIngestResponseModel(ut.TestCase):
     def test_hazard_levels(self):
 
-        test_conf = '../tests/test_scenario_ps_coal.conf'
+        test_conf = './tests/test_scenario_ps_coal.conf'
         scenario = Scenario(test_conf)
 
         hazard_level_it = HazardLevels(scenario)
@@ -27,7 +27,7 @@ class TestIngestResponseModel(ut.TestCase):
             self.assertTrue(hazard_level.determine_intensity_at(location) > 0)
 
     def test_hazard_raster(self):
-        test_conf = '../tests/test_scenario_ps_coal.conf'
+        test_conf = './tests/test_scenario_ps_coal.conf'
         scenario = Scenario(test_conf)
 
         test_raster = Dataset("test_raster.nc", "w", format="NETCDF4")

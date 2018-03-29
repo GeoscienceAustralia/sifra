@@ -38,6 +38,7 @@ def ingest_spreadsheet(config):
 
     for index, damage_state in facility_data.fragility_data.iterrows():
         component_type = index[0]
+
         if component_type not in component_dict:
             damage_algorithm_vals = IODict()
             damage_algorithm_vals[u'DS0 None'] = Level0Response()
@@ -54,13 +55,15 @@ def ingest_spreadsheet(config):
 
         ds_level = index[1]
         if index in damage_def_dict:
-            damage_def_state = damage_def_dict[index]
+            damage_def_state = damage_def_dict[index]['damage_state_definition']
+        else:
+            damage_def_state = "NA."
 
         response_params = {}
         response_params['damage_ratio'] = damage_state['damage_ratio']
         response_params['functionality'] = damage_state['functionality']
         response_params['fragility_source'] = damage_state['fragility_source']
-        response_params['damage_state_description'] = damage_def_state['damage_state_definition']
+        response_params['damage_state_description'] = damage_def_state
         if damage_state['damage_function'] == 'Lognormal':
             # translate the column names
             response_params['median'] = damage_state['damage_median']
@@ -82,6 +85,10 @@ def ingest_spreadsheet(config):
         recovery_columns = ('recovery_std', 'recovery_mean', 'recovery_95percentile')
         recovery_params = {key: damage_state[key] for key in recovery_columns}
         recovery_algorithm_vals[ds_level] = RecoveryState(**recovery_params)
+
+    # testing
+    # print(component_type, component_dict.__jsonify__())
+    # raw_input("Press Enter to continue...")
 
     # Create a damage algorithm in the AlgorithmFactory for the components
     for component_type in component_dict.keys():

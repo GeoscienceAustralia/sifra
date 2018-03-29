@@ -13,7 +13,7 @@ from sifra.modelling.responsemodels import DamageAlgorithm
 class TestIngestResponseModel(ut.TestCase):
     def test_ingest_1(self):
 
-        test_conf = '../tests/test_scenario_ps_coal.conf'
+        test_conf = './tests/test_scenario_ps_coal.conf'
 
         if_system, _ = ingest_spreadsheet(test_conf)
 
@@ -24,7 +24,7 @@ class TestIngestResponseModel(ut.TestCase):
 
     def test_ingest_2(self):
 
-        test_conf = '../tests/test_identical_comps.conf'
+        test_conf = './tests/test_identical_comps.conf'
 
         if_system, _ = ingest_spreadsheet(test_conf)
 
@@ -37,7 +37,7 @@ class TestIngestResponseModel(ut.TestCase):
         # Damage and recovery algorithms are now separated
         # so check the ingest is populating the Class
 
-        test_conf = '../tests/test_scenario_ps_coal.conf'
+        test_conf = './tests/test_scenario_ps_coal.conf'
 
         if_system, algorithm_factory = ingest_spreadsheet(test_conf)
 
@@ -49,7 +49,7 @@ class TestIngestResponseModel(ut.TestCase):
         self.assertTrue(len(algorithm_factory.recovery_algorithms['earthquake']) > 0)
 
     def test_algorithm_factory(self):
-        test_conf = '../tests/test_scenario_ps_coal.conf'
+        test_conf = './tests/test_scenario_ps_coal.conf'
         scenario = Scenario(test_conf)
         if_system, algorithm_factory = ingest_spreadsheet(test_conf)
 

@@ -2,7 +2,7 @@ from __future__ import print_function
 import os
 import networkx as nx
 import re
-from networkx.readwrite.json_graph import node_link_data
+# from networkx.readwrite.json_graph import node_link_data
 
 # -----------------------------------------------------------------------------
 
